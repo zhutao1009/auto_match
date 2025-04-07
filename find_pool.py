@@ -55,10 +55,9 @@ def filter_and_update_hatchery_pools(file_path, family, parent_type, id_value):
         
         # 将修改后的数据存入文件
         df.to_csv(file_path, sep="\t", index=False)
-        
         return first_pool
     else:
-        return None
+        None
 
 # 示例用法
 file_path = os.path.join(script_dir,"pool_info.tsv")
@@ -66,7 +65,9 @@ family = result["家系"]
 parent_type = result["性别"]
 id_value = result["ID"]
 pool_assign = filter_and_update_hatchery_pools(file_path, family, parent_type, id_value)
-print(pool_assign)  # 输出修改状态的孵化池
+
+message = f"ID：{id_value} \n 家系：{family}\n 性别 ：{parent_type}\n分配池号：{pool_assign}\n"
+print(message)  
 
 
 
