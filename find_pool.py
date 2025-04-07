@@ -28,14 +28,6 @@ def get_family_and_gender_by_id(file_path, search_id):
     else:
         return None
 
-# 示例用法
-# id_path = 'F:\\大口黑鲈2025年家系构建\\第二次分池\\id.tsv'
-
-id_path=os.path.join(script_dir, "id.tsv")
-
-search_id = str(input("请输入要查询的ID: "))
-result = get_family_and_gender_by_id(id_path, search_id)
-#print(result["ID"])  # 输出对应ID的家系和性别信息
 
 
 def filter_and_update_hatchery_pools(file_path, family, parent_type, id_value):
@@ -60,14 +52,24 @@ def filter_and_update_hatchery_pools(file_path, family, parent_type, id_value):
         None
 
 # 示例用法
-file_path = os.path.join(script_dir,"pool_info.tsv")
-family = result["家系"]
-parent_type = result["性别"]
-id_value = result["ID"]
-pool_assign = filter_and_update_hatchery_pools(file_path, family, parent_type, id_value)
 
-message = f"ID：{id_value} \n 家系：{family}\n 性别 ：{parent_type}\n分配池号：{pool_assign}\n"
-print(message)  
+# 示例用法
+# id_path = 'F:\\大口黑鲈2025年家系构建\\第二次分池\\id.tsv'
+while True:
+    search_id = str(input("请输入要查询的ID: "))
+    if not search_id:
+        break
+    else:
+        id_path=os.path.join(script_dir, "id.tsv")
+        result = get_family_and_gender_by_id(id_path, search_id)
+        file_path = os.path.join(script_dir,"pool_info.tsv")
+        family = result["家系"]
+        parent_type = result["性别"]
+        id_value = result["ID"]
+        pool_assign = filter_and_update_hatchery_pools(file_path, family, parent_type, id_value)
+
+        message = f"ID：{id_value} \n 家系：{family}\n 性别 ：{parent_type}\n分配池号：{pool_assign}\n"
+        print(message)  
 
 
 
