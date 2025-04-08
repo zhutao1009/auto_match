@@ -35,7 +35,11 @@ def filter_and_update_hatchery_pools(file_path, family, parent_type, id_value):
     df = pd.read_csv(file_path, sep="\t", dtype=str)
     # 过滤符合条件的行
     filtered_df = df[(df['家系'] == family) & (df['亲本类型'] == parent_type) & (df['have_fish'] == 'no_fish')]
-    
+    male=df[ (df['亲本类型'] == "雄性") & (df['have_fish'] == 'no_fish')]
+    female=df[ (df['亲本类型'] == "雌性") & (df['have_fish'] == 'no_fish')]
+   
+    ms=f"缺雄鱼{male.shape[0]}\n缺雌鱼{female.shape[0]}"
+    print(ms)
     # 检查是否有符合条件的孵化池
     if not filtered_df.empty:
         # 选取第一个符合条件的孵化池
