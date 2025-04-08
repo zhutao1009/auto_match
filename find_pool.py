@@ -60,7 +60,7 @@ while True:
     if not search_id:
         break
     else:
-        id_path=os.path.join(script_dir, "id.tsv")
+        id_path=os.path.join(script_dir, "id2.tsv")
         result = get_family_and_gender_by_id(id_path, search_id)
         file_path = os.path.join(script_dir,"pool_info.tsv")
         family = result["家系"]
