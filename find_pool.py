@@ -49,7 +49,7 @@ def filter_and_update_hatchery_pools(file_path, family, parent_type, id_value):
         df.to_csv(file_path, sep="\t", index=False)
         return first_pool
     else:
-        None
+        return None
 
 # 示例用法
 
@@ -62,15 +62,17 @@ while True:
     else:
         id_path=os.path.join(script_dir, "id2.tsv")
         result = get_family_and_gender_by_id(id_path, search_id)
-        file_path = os.path.join(script_dir,"pool_info.tsv")
-        family = result["家系"]
-        parent_type = result["性别"]
-        id_value = result["ID"]
-        pool_assign = filter_and_update_hatchery_pools(file_path, family, parent_type, id_value)
+        if result != None:
+            file_path = os.path.join(script_dir,"pool_info.tsv")
+            family = result["家系"]
+            parent_type = result["性别"]
+            id_value = result["ID"]
+            pool_assign = filter_and_update_hatchery_pools(file_path, family, parent_type, id_value)
 
-        message = f"ID：{id_value} \n 家系：{family}\n 性别 ：{parent_type}\n分配池号：{pool_assign}\n"
-        print(message)  
-
+            message = f"ID：{id_value} \n 家系：{family}\n 性别 ：{parent_type}\n分配池号：{pool_assign}\n"
+            print(message)  
+        else:
+            print(f"没有找到ID为 {search_id} 的记录，请检查输入的ID是否正确。")
 
 
 
